@@ -15,9 +15,15 @@ public class BoardTest {
     }
 
     @Test
-    public void testRanks(){
-        assertEquals("pppppppp", board.printRow("second rank"));
-        assertEquals("PPPPPPPP", board.printRow("seventh rank"));
+    public void testBoardRanks(){
+        assertEquals("........", board.printRow(8));
+        assertEquals("PPPPPPPP", board.printRow(7));
+        assertEquals("........", board.printRow(6));
+        assertEquals("........", board.printRow(5));
+        assertEquals("........", board.printRow(4));
+        assertEquals("........", board.printRow(3));
+        assertEquals("pppppppp", board.printRow(2));
+        assertEquals("........", board.printRow(1));
     }
 
 }

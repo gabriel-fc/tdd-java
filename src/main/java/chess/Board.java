@@ -34,13 +34,24 @@ public class Board {
 
     }
 
-    public String printRow(String id){
+    public String printRow(int id){
         StringBuilder buffer = new StringBuilder();
-        ArrayList<Pawn> row = id.equals("second rank") ? secondRank : seventhRank;
-        for (Pawn pawn: row) {
-            buffer.append(pawn.toString());
+        for (int i = 0; i < 8; i++) {
+            if(id == 2){
+                buffer.append(secondRank.get(i).toString());
+            }else if(id == 7){
+                buffer.append(seventhRank.get(i).toString());
+            }else{
+                buffer.append('.');
+            }
         }
         return buffer.toString();
+    }
+
+    public void printBoard(){
+        for (int i = 8; i > 0; i--) {
+            System.out.println(printRow(i));
+        }
     }
 
     public void addPiece(Pawn piece){

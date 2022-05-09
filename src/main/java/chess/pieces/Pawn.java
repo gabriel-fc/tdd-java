@@ -17,4 +17,10 @@ public class Pawn {
     public String getColor() {
         return color;
     }
+
+    @Override
+    public String toString(){
+        if (color.equals(WHITE_COLOR)) return "p";
+        return "P";
+    }
 }

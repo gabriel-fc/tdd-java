@@ -11,16 +11,13 @@ public class BoardTest {
     @Before
     public void setUp(){
         board = new Board();
+        board.initialize();
     }
 
     @Test
-    public void TestCreate(){
-        Pawn pawn1 = new Pawn("white");
-        Pawn pawn2 = new Pawn("black");
-        assertEquals(0, board.getNumPiecesOnTheBoard());
-        board.addPiece(pawn1);
-        assertEquals(pawn1, board.getPieceByIndex(0));
-        board.addPiece(pawn2);
-        assertEquals(pawn2, board.getPieceByIndex(1));
+    public void testRanks(){
+        assertEquals("pppppppp", board.printRow("second rank"));
+        assertEquals("PPPPPPPP", board.printRow("seventh rank"));
     }
+
 }

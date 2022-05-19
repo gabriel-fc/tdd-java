@@ -7,29 +7,6 @@ public class Piece {
     private final Color color;
     private final Type type;
     public enum Color {BLACK, WHITE}
-//    public enum Type {
-//        PAWN(1, 'p'), QUEEN(9, 'q'), BISHOP(3, 'b'),
-//        KNIGHT(2.5, 'n'), KING(0, 'k'), ROOK(5, 'r'),
-//        NO_PIECE(0, '.');
-//
-//
-//    private final double value;
-//    private final char representation;
-//
-//
-//       private Type(double value, char representation) {
-//           this.value = value;
-//           this.representation = representation;
-//       }
-//
-//        public char getRepresentation(Color color) {
-//            return color == Color.BLACK ? Character.toUpperCase(representation) : representation;
-//        }
-//
-//
-//    };
-
-
 
     private Piece(Type type, Color Color){
         Piece.counter++;
@@ -60,12 +37,12 @@ public class Piece {
 
 
     public boolean isBlack(){return color == Color.BLACK;}
+    public boolean isWhite(){return color == Color.WHITE;}
 
     public Color getColor() {
         return color;
     }
 
-    public boolean isWhite(){return color == Color.WHITE;}
 
 
     public char getRepresentation(){

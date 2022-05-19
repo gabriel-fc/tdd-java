@@ -2,25 +2,21 @@ package chess;
 
 import chess.pieces.BoardInterface;
 import chess.pieces.Piece;
-import chess.pieces.PieceRepresentation;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import util.StringUtil;
 
-import java.awt.*;
-
 
 public class BoardTest {
-    Board board;
+    Board board = new Board();
     private final double DELTA = 0.05;
     private String BLANK_RANK = StringUtil.appendNewLine("........");
 
 
     @Before
     public void setUp() {
-        board = new Board();
         board.initialize();
     }
 
@@ -55,25 +51,18 @@ public class BoardTest {
     }
 
     @Test
-    public void testCountPiecesByRepPerFile(){
-        assertEquals(1, board.countPiecesByRepPerFile('p', 'a'));
-        assertEquals(1, board.countPiecesByRepPerFile('P', 'a'));
-        assertEquals(1, board.countPiecesByRepPerFile('r', 'a'));
-        assertEquals(1, board.countPiecesByRepPerFile('R', 'a'));
-        assertEquals(1, board.countPiecesByRepPerFile('p', 'b'));
-        assertEquals(1, board.countPiecesByRepPerFile('P', 'b'));
-        assertEquals(1, board.countPiecesByRepPerFile('n', 'b'));
-        assertEquals(1, board.countPiecesByRepPerFile('N', 'b'));
+    public void testisAloneInTheFile(){
+        assertTrue(board.isAloneInTheFile('p', 'a'));
+        assertTrue(board.isAloneInTheFile('P', 'a'));
+        assertTrue(board.isAloneInTheFile('r', 'a'));
+        assertTrue(board.isAloneInTheFile('R', 'a'));
+        assertTrue(board.isAloneInTheFile('p', 'b'));
+        assertTrue(board.isAloneInTheFile('P', 'b'));
+        assertTrue(board.isAloneInTheFile('n', 'b'));
+        assertTrue(board.isAloneInTheFile('N', 'b'));
 
     }
 
-    @Test
-    public void countPiecesByRepresentation(){
-        assertEquals(8, board.countPieceByRep(Piece.Color.WHITE, Piece.Type.PAWN));
-        assertEquals(1, board.countPieceByRep(Piece.Color.BLACK, Piece.Type.KING));
-        assertEquals(2, board.countPieceByRep(Piece.Color.BLACK, Piece.Type.KNIGHT));
-
-    }
 
     @Test
     public void testEmptyBoard(){

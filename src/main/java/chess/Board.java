@@ -1,7 +1,6 @@
 package chess;
 
 import chess.pieces.Piece;
-import chess.pieces.PieceRepresentation;
 import util.StringUtil;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ public class Board {
 
     private ArrayList<HashMap<Character, Piece>> board;
 
-    public Board() {}
 
     char[] files = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     public void setEmptyRank(int rank){
@@ -24,6 +22,7 @@ public class Board {
             setEmptyRank(i);
         }
     }
+
 
     public void initialize() {
         Piece.resetCounter();
@@ -102,28 +101,25 @@ public class Board {
         }
     }
 
-    public int countPiecesByRepPerFile(char rep, char file){
+    public boolean isAloneInTheFile(char rep, char file){
         int count = 0;
         for (int i = 7; i >= 0; i--) {
             Piece piece = board.get(i).get(file);
-            if (piece.getRepresentation() == rep) count++;
-        }
-        return count;
-    }
+            if (piece.getRepresentation() == rep) {
+                count++;
+                if(count > 1) return false;
+            }
 
-    public double getPieceStrength(Piece piece, char file){
-        if(Piece.Type.PAWN == piece.getType()){
-            int count = countPiecesByRepPerFile(piece.getRepresentation(), file);
-            return count > 1 ?  0.5 : piece.getValue();
         }
-        return piece.getValue();
+        return true;
     }
 
     public double getStrengthByFile(Piece.Color color, char file){
         double strength = 0;
         for (int i = 0; i < 8; i++) {
             Piece piece = board.get(i).get(file);
-            if (color == piece.getColor()) strength += getPieceStrength(piece, file);
+            if (color == piece.getColor())
+                strength += piece.getStrength(isAloneInTheFile(piece.getRepresentation(), file));
         }
         return strength;
     }
@@ -137,16 +133,7 @@ public class Board {
         }
         return  strength;
     }
-    
 
-    public int countPieceByRep(Piece.Color color, Piece.Type type){
-        int count = 0;
-        char rep = PieceRepresentation.getPieceRepresentation(color, type);
-        for (char file: files) {
-            count += countPiecesByRepPerFile(rep, file);
-        }
-        return count;
-    }
 
     public void placePiece(Piece piece, String position){
         int rank = StringUtil.getRankFromInput(position);
@@ -154,7 +141,5 @@ public class Board {
         board.get(rank).put(file, piece);
 
     }
-
-
 }
 

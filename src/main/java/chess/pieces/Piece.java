@@ -1,33 +1,33 @@
 package chess.pieces;
+import chess.pieces.types.Type;
 
 public class Piece {
 
-
-
-
-    /**
-     @value number of pieces on the board
-     */
     private static int counter = 0;
-
-    /**
-     @value instance Color
-     */
     private final Color color;
-
-    /**
-     @value currently refers to the piece Type (e.g.: b for bishop,p for pawn, n for knight...)
-     */
     private final Type type;
-    public enum Color {BLACK, WHITE};
-    public enum Type {PAWN(1), QUEEN(9), BISHOP(3), KNIGHT(2.5),
-        KING(0), ROOK(5), NO_PIECE(0);
-    public final double value;
-       private Type(double value) {
-           this.value = value;
-       }
-
-    };
+    public enum Color {BLACK, WHITE}
+//    public enum Type {
+//        PAWN(1, 'p'), QUEEN(9, 'q'), BISHOP(3, 'b'),
+//        KNIGHT(2.5, 'n'), KING(0, 'k'), ROOK(5, 'r'),
+//        NO_PIECE(0, '.');
+//
+//
+//    private final double value;
+//    private final char representation;
+//
+//
+//       private Type(double value, char representation) {
+//           this.value = value;
+//           this.representation = representation;
+//       }
+//
+//        public char getRepresentation(Color color) {
+//            return color == Color.BLACK ? Character.toUpperCase(representation) : representation;
+//        }
+//
+//
+//    };
 
 
 
@@ -54,8 +54,8 @@ public class Piece {
         return type;
     }
 
-    public double getValue(){
-        return type.value;
+    public double getStrength(boolean isAloneInFile){
+        return type.getStrength(isAloneInFile);
     }
 
 
@@ -69,7 +69,7 @@ public class Piece {
 
 
     public char getRepresentation(){
-        return PieceRepresentation.getPieceRepresentation(color, type);
+        return type.getRepresentation(color);
     }
 
     public static Piece createWhitePawn(){

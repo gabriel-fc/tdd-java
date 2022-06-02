@@ -1,0 +1,96 @@
+package chess.pieces;
+import chess.pieces.types.*;
+import chess.pieces.types.movementstrategy.Movements;
+
+import java.util.ArrayList;
+
+public class Piece {
+
+    private final Color color;
+
+    private final char representation;
+
+    public enum Color {BLACK, WHITE, NONE}
+    protected final Movements movements = new Movements();
+
+    protected Piece(Color Color, char representation){
+        this.color = Color;
+        this.representation = representation;
+    }
+
+    public double getStrength(boolean isAloneInFile){
+
+        //return getStrength(isAloneInFile);
+        return 0;
+    }
+
+    public boolean isBlack(){return color == Color.BLACK;}
+    public boolean isWhite(){return color == Color.WHITE;}
+
+    public Color getColor() {
+        return color;
+    }
+
+
+
+    public char getRepresentation(){
+        return color == Color.BLACK ? Character.toUpperCase(representation) : representation;
+    }
+
+    public static Piece createWhitePawn(){
+        return new Pawn(Color.WHITE);
+    }
+    public static Piece createBlackPawn(){
+        return new Pawn(Color.BLACK);
+    }
+
+    public static Piece createWhiteQueen(){
+        return new Queen(Color.WHITE);
+    }
+
+    public static Piece createBlackQueen(){
+        return new Queen(Color.BLACK);
+    }
+
+    public static Piece createWhiteBishop(){
+        return new Bishop(Color.WHITE);
+    }
+
+    public static Piece createBlackBishop(){
+        return new Bishop(Color.BLACK);
+    }
+
+    public static Piece createWhiteRook(){
+        return new Rook(Color.WHITE);
+    }
+
+    public static Piece createBlackRook(){
+        return new Rook(Color.BLACK);
+    }
+
+    public static Piece createWhiteKing(){
+        return new King(Color.WHITE);
+    }
+
+    public static Piece createBlackKing(){
+        return new King(Color.BLACK);
+    }
+
+    public static Piece createWhiteKnight(){
+        return new Knight(Color.WHITE);
+    }
+
+    public static Piece createBlackKnight(){
+        return new Knight(Color.BLACK);
+    }
+
+    public static Piece noPiece(){
+        return new NoPiece();
+    }
+
+    public ArrayList<String> getPossibleMoves(String position){
+        return new ArrayList<>();
+    }
+
+
+}

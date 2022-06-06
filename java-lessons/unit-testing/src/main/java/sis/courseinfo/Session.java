@@ -4,7 +4,7 @@ import sis.studentinfo.Student;
 
 import java.util.*;
 
-abstract public class Session implements Comparable<Session> {
+abstract public class Session implements Comparable<Session>, Iterable<Student> {
     private static int count;
     private String department;
     private String number;
@@ -60,5 +60,26 @@ abstract public class Session implements Comparable<Session> {
         calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
         return calendar.getTime();
     }
+
+    double averageGpaForPartTimeStudents() {
+        double total = 0.0;
+        int count = 0;
+        for (Iterator<Student> it = students.iterator();
+             it.hasNext(); ) {
+            Student student = it.next();
+            if (student.isFullTime())
+                continue;
+            count++;
+            total += student.getGpa();
+        }
+        if (count == 0) return 0.0;
+        return total / count;
+    }
+
+
+    public Iterator<Student> iterator(){
+        return students.iterator();
+    }
+
 }
 

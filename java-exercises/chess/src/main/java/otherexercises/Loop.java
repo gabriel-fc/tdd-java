@@ -9,4 +9,12 @@ public class Loop {
         return value;
     }
 
+    public static int fatorialWithWhile(int n){
+        int value = 1, count = 1;
+        while(count <= n){
+            value *= count;
+        }
+        return value;
+    }
+
 }

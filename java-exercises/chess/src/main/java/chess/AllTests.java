@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({PieceTest.class,
         BoardTest.class, CharacterTest.class,
-        TypeTest.class, MovementsTest.class, QueenTest.class, KingTest.class})
+        TypeTest.class, MovementsTest.class})
 
 public class AllTests {
 }

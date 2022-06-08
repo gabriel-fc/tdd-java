@@ -23,10 +23,10 @@ public class Movements {
     private static String execute(String currentPosition, Piece.Color color, int rankMove,
                                   int fileMove, MoveStrategy oppositeMove){
         int rank = StringUtil.getRankFromInput(currentPosition);
-        char file = StringUtil.getFileFromInput(currentPosition);
+        int file = StringUtil.getFileFromInput(currentPosition);
         if(color == Piece.Color.BLACK)
             return oppositeMove.move(currentPosition, Piece.Color.WHITE);
-        return StringUtil.setPosition((char) (file + fileMove), rank + rankMove);
+        return StringUtil.setPosition(file + fileMove, rank + rankMove);
     }
 
     public ArrayList<String> moveInDirection(String currentPosition, Piece.Color color,
@@ -41,14 +41,14 @@ public class Movements {
 
     public class Forward implements MoveStrategy{
         public String move(String currentPosition, Piece.Color color){
-            return (Movements.execute(currentPosition, color, 1, 0, new Backward()));
+            return (Movements.execute(currentPosition, color, -1, 0, new Backward()));
         }
 
     }
 
     public class Backward implements MoveStrategy{
         public String move(String currentPosition, Piece.Color color){
-            return (Movements.execute(currentPosition, color, -1, 0, new Forward()));
+            return (Movements.execute(currentPosition, color, 1, 0, new Forward()));
         }
     }
 
@@ -67,28 +67,28 @@ public class Movements {
 
     public class LeftForward implements MoveStrategy{
         public String move(String currentPosition, Piece.Color color){
-            return (Movements.execute(currentPosition, color, 1, -1,
+            return (Movements.execute(currentPosition, color, -1, -1,
                     new RightBackward()));
         }
     }
 
     public class RightForward implements MoveStrategy{
         public String move(String currentPosition, Piece.Color color){
-            return (Movements.execute(currentPosition, color, 1, 1,
+            return (Movements.execute(currentPosition, color, -1, 1,
                     new LeftBackward()));
         }
     }
 
     public class LeftBackward implements MoveStrategy{
         public String move(String currentPosition, Piece.Color color){
-            return (Movements.execute(currentPosition, color, -1, -1,
+            return (Movements.execute(currentPosition, color, 1, -1,
                     new RightForward()));
         }
     }
 
     public class RightBackward implements MoveStrategy{
         public String move(String currentPosition, Piece.Color color){
-            return (Movements.execute(currentPosition, color, -1, 1,
+            return (Movements.execute(currentPosition, color, 1, 1,
                     new LeftForward()));
         }
     }

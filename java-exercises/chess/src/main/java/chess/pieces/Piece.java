@@ -1,15 +1,16 @@
 package chess.pieces;
 import chess.pieces.types.*;
 import chess.pieces.types.movementstrategy.Movements;
+import util.StringUtil;
 
 import java.util.ArrayList;
 
-public class Piece {
+public class Piece{
 
     private final Color color;
-
     private final char representation;
-
+    private int rank;
+    private int file;
     public enum Color {BLACK, WHITE, NONE}
     protected final Movements movements = new Movements();
 
@@ -92,5 +93,14 @@ public class Piece {
         return new ArrayList<>();
     }
 
+    public void setPosition(int rank, int file){
+        this.rank = rank;
+        this.file = file;
+    }
+
+    public void setPosition(String position){
+        this.rank = StringUtil.getRankFromInput(position);
+        this.file = StringUtil.getFileFromInput(position);
+    }
 
 }

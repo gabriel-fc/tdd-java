@@ -1,6 +1,7 @@
 package chess;
 
 import chess.board.BoardTest;
+import chess.game.GameTest;
 import chess.pieces.PieceTest;
 
 import chess.pieces.types.TypeTest;
@@ -12,7 +13,7 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({PieceTest.class,
         BoardTest.class, CharacterTest.class,
-        TypeTest.class, MovementsTest.class})
+        TypeTest.class, MovementsTest.class, GameTest.class})
 
 public class AllTests {
 }

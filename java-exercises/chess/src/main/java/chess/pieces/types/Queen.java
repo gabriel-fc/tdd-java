@@ -3,6 +3,7 @@ package chess.pieces.types;
 import chess.pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Queen extends Piece{
     public Queen(Color color){
@@ -34,7 +35,7 @@ public class Queen extends Piece{
 
         movements.moveInDirection(position, getColor(),
                  movements.new LeftBackward(), possibleMoves);
-
+        Collections.sort(possibleMoves);
         return possibleMoves;
     }
 

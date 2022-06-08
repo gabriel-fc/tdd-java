@@ -2,104 +2,102 @@ package chess.board;
 
 import chess.pieces.Piece;
 import chess.pieces.types.NoPiece;
+import chess.pieces.types.Queen;
 import util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 
-public class Board {
+public class Board implements Iterable<Piece[]> {
 
-    private ArrayList<HashMap<Character, Piece>> board;
-
+    private Piece[][] board;
     private int piecesCount;
-    public static boolean isValidFile(char file){
-        return file >= 97 && file < 105;
+
+    public Board(){
+        board = new Piece[8][8];
+        piecesCount = 0;
     }
 
-    public static boolean isValidRank(int rank){
-        return rank >= 0 && rank < 8;
+    public static boolean isValidIndex(int file){
+        return file >= 0 && file < 8;
     }
+
 
     public static boolean isValidPosition(String position){
-        return isValidRank(StringUtil.getRankFromInput(position)) &&
-        isValidFile(StringUtil.getFileFromInput(position));
+        return isValidIndex(StringUtil.getRankFromInput(position)) &&
+        isValidIndex(StringUtil.getFileFromInput(position));
     }
 
 
     public void setEmptyRank(int rank){
-        for (char file: StringUtil.FILES) {
+        for (int file = 0; file < 8; file++) {
             placePiece(Piece.noPiece(), StringUtil.setPosition(file, rank));
         }
     }
     public void setEmptyBoard(){
-        for (int i = 0; i < 8; i++) {
-            setEmptyRank(i);
+        for (int rank = 0; rank < 8; rank++) {
+            setEmptyRank(rank);
         }
     }
 
+
     public void initialize() {
 
-        board = new ArrayList<>();
         //Rank 1: white pieces
-        board.add(new HashMap<>());
-        board.get(0).put('a', Piece.createWhiteRook());
-        board.get(0).put('b', Piece.createWhiteKnight());
-        board.get(0).put('c', Piece.createWhiteBishop());
-        board.get(0).put('d', Piece.createWhiteQueen());
-        board.get(0).put('e', Piece.createWhiteKing());
-        board.get(0).put('f', Piece.createWhiteBishop());
-        board.get(0).put('g', Piece.createWhiteKnight());
-        board.get(0).put('h', Piece.createWhiteRook());
+        placePiece(Piece.createWhiteRook(), "a1");
+        placePiece(Piece.createWhiteKnight(), "b1");
+        placePiece(Piece.createWhiteBishop(), "c1");
+        placePiece(Piece.createWhiteQueen(), "d1");
+        placePiece(Piece.createWhiteKing(), "e1");
+        placePiece(Piece.createWhiteBishop(), "f1");
+        placePiece(Piece.createWhiteKnight(), "g1");
+        placePiece(Piece.createWhiteRook(), "h1");
 
         //rank 2: white pawns
-        board.add(new HashMap<>());
-        board.get(1).put('a', Piece.createWhitePawn());
-        board.get(1).put('b', Piece.createWhitePawn());
-        board.get(1).put('c', Piece.createWhitePawn());
-        board.get(1).put('d', Piece.createWhitePawn());
-        board.get(1).put('e', Piece.createWhitePawn());
-        board.get(1).put('f', Piece.createWhitePawn());
-        board.get(1).put('g', Piece.createWhitePawn());
-        board.get(1).put('h', Piece.createWhitePawn());
+        placePiece(Piece.createWhitePawn(), "a2");
+        placePiece(Piece.createWhitePawn(), "b2");
+        placePiece(Piece.createWhitePawn(), "c2");
+        placePiece(Piece.createWhitePawn(), "d2");
+        placePiece(Piece.createWhitePawn(), "e2");
+        placePiece(Piece.createWhitePawn(), "f2");
+        placePiece(Piece.createWhitePawn(), "g2");
+        placePiece(Piece.createWhitePawn(), "h2");
+
 
         //fill the next 4 ranks with blank space
-        for (int i = 2; i < 6; i++) {
-            board.add(new HashMap<>());
-            for (char key: StringUtil.FILES) {
-                board.get(i).put(key, Piece.noPiece());
+        for (int rank = 2; rank < 6; rank++) {
+            for (int file = 0; file < 8; file++) {
+                board[rank][file] = new NoPiece();
             }
         }
 
         //rank 7: black pawns
-        board.add(new HashMap<>());
-        board.get(6).put('a', Piece.createBlackPawn());
-        board.get(6).put('b', Piece.createBlackPawn());
-        board.get(6).put('c', Piece.createBlackPawn());
-        board.get(6).put('d', Piece.createBlackPawn());
-        board.get(6).put('e', Piece.createBlackPawn());
-        board.get(6).put('f', Piece.createBlackPawn());
-        board.get(6).put('g', Piece.createBlackPawn());
-        board.get(6).put('h', Piece.createBlackPawn());
+        placePiece(Piece.createBlackPawn(), "a7");
+        placePiece(Piece.createBlackPawn(), "b7");
+        placePiece(Piece.createBlackPawn(), "c7");
+        placePiece(Piece.createBlackPawn(), "d7");
+        placePiece(Piece.createBlackPawn(), "e7");
+        placePiece(Piece.createBlackPawn(), "f7");
+        placePiece(Piece.createBlackPawn(), "g7");
+        placePiece(Piece.createBlackPawn(), "h7");
 
-        //Rank 8: Black pieces
-        board.add(new HashMap<>());
-        board.get(7).put('a', Piece.createBlackRook());
-        board.get(7).put('b', Piece.createBlackKnight());
-        board.get(7).put('c', Piece.createBlackBishop());
-        board.get(7).put('d', Piece.createBlackQueen());
-        board.get(7).put('e', Piece.createBlackKing());
-        board.get(7).put('f', Piece.createBlackBishop());
-        board.get(7).put('g', Piece.createBlackKnight());
-        board.get(7).put('h', Piece.createBlackRook());
-
-
-        piecesCount = 32;
+        //rank 8: black pieces
+        placePiece(Piece.createBlackRook(), "a8");
+        placePiece(Piece.createBlackKnight(), "b8");
+        placePiece(Piece.createBlackBishop(), "c8");
+        placePiece(Piece.createBlackQueen(), "d8");
+        placePiece(Piece.createBlackKing(), "e8");
+        placePiece(Piece.createBlackBishop(), "f8");
+        placePiece(Piece.createBlackKnight(), "g8");
+        placePiece(Piece.createBlackRook(), "h8");
     }
     public Piece getPiece(String position){
         int rank = StringUtil.getRankFromInput(position);
-        char file = StringUtil.getFileFromInput(position);
+        int file = StringUtil.getFileFromInput(position);
         try{
-            return board.get(rank).get(file);
+            return board[rank][file];
 
         }catch (IndexOutOfBoundsException e) {
             String wrongPosition = file + Integer.toString(rank);
@@ -115,23 +113,22 @@ public class Board {
         return piecesCount;
     }
 
-    public boolean isAloneInTheFile(char rep, char file){
+    public boolean isAloneInTheFile(char rep, int file){
         int count = 0;
         for (int i = 7; i >= 0; i--) {
-            Piece piece = board.get(i).get(file);
+            Piece piece = getPiece(StringUtil.setPosition(file, i));
             if (piece.getRepresentation() == rep) {
                 count++;
                 if(count > 1) return false;
             }
-
         }
         return true;
     }
 
-    public double getStrengthByFile(Piece.Color color, char file){
+    public double getStrengthByFile(Piece.Color color, int file){
         double strength = 0;
         for (int i = 0; i < 8; i++) {
-            Piece piece = board.get(i).get(file);
+            Piece piece = board[i][file];
             if (color == piece.getColor())
                 strength += piece.getStrength(isAloneInTheFile(piece.getRepresentation(), file));
         }
@@ -140,25 +137,24 @@ public class Board {
 
     public double getStrength(Piece.Color color){
         double strength = 0;
-        for (char file: StringUtil.FILES) {
-            double value = getStrengthByFile(color, file);
-            strength += value;
-
+        for (int file = 0; file < 8; file++) {
+            strength += getStrengthByFile(color, file);
         }
         return  strength;
     }
 
-
     public void placePiece(Piece piece, String position){
         int rank = StringUtil.getRankFromInput(position);
-        char file = StringUtil.getFileFromInput(position);
-        board.get(rank).put(file, piece);
+        int file = StringUtil.getFileFromInput(position);
+        board[rank][file] = piece;
+        piece.setPosition(position);
+        incrementCount();
 
     }
-
+    private void incrementCount(){piecesCount++;}
     public boolean isPositionEmpty(String position){
         return getPiece(position).getClass() == NoPiece.class;
     }
-
-}
+    @Override
+    public Iterator<Piece[]> iterator() {return Arrays.asList(board).iterator();}}
 

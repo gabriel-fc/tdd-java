@@ -3,6 +3,7 @@ package chess.pieces.types;
 import chess.pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class King extends Piece {
 
@@ -40,6 +41,7 @@ public class King extends Piece {
         super.movements.moveOneSquareInDirection(position, super.getColor(),
                 movements.new LeftBackward(), possibleMoves);
 
+        Collections.sort(possibleMoves);
         return possibleMoves;
     }
 

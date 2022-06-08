@@ -3,6 +3,8 @@ package chess.pieces.types;
 import chess.pieces.Piece;
 import org.junit.Test;
 
+import java.awt.*;
+
 import static org.junit.Assert.assertEquals;
 
 public class TypeTest {
@@ -23,24 +25,24 @@ public class TypeTest {
     @Test
     public void getKingPossibleMovesTest(){
         King king = new King(Piece.Color.WHITE);
-        assertEquals("[b5, b3, c4, a4, c5, a5, c3, a3]",
+        assertEquals("[a3, a4, a5, b3, b5, c3, c4, c5]",
                 king.getPossibleMoves("b4").toString());
 
-        assertEquals("[b2, c1, a1, c2, a2]",
+        assertEquals("[a1, a2, b2, c1, c2]",
                 king.getPossibleMoves("b1").toString());
 
     }
 
     @Test
     public void getQueenPossibleMovesTest(){
-        assertEquals("[d4, d5, d6, d7, d8, d2, d1, e3, f3, g3, " +
-                        "h3, c3, b3, a3, e4, f5, g6, h7, c4, b5, a6, e2, f1, c2, b1]",
-                (new Queen(Piece.Color.WHITE)).
-                        getPossibleMoves("d3").toString());
-        assertEquals("[a4, a5, a6, a7, a8, a2, a1, b3, c3, d3, " +
-                        "e3, f3, g3, h3, b4, c5, d6, e7, f8, b2, c1]",
-                (new Queen(Piece.Color.WHITE)).
-                        getPossibleMoves("a3").toString());
+        Piece whiteQueen = new Queen(Piece.Color.WHITE);
+        Piece blackQueen = new Queen(Piece.Color.BLACK);
+        assertEquals("[a3, a6, b1, b3, b5, c2, c3, c4, d1, d2, " +
+                        "d4, d5, d6, d7, d8, e2, e3, e4, f1, f3, f5, g3, g6, h3, h7]",
+                whiteQueen.getPossibleMoves("d3").toString());
+        assertEquals("[a1, a2, a4, a5, a6, a7, a8, b2, b3, " +
+                        "b4, c1, c3, c5, d3, d6, e3, e7, f3, f8, g3, h3]",
+                blackQueen.getPossibleMoves("a3").toString());
     }
 
     @Test

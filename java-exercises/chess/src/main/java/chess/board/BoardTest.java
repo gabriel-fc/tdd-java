@@ -54,14 +54,14 @@ public class BoardTest {
 
     @Test
     public void testisAloneInTheFile(){
-        assertTrue(board.isAloneInTheFile('p', 'a'));
-        assertTrue(board.isAloneInTheFile('P', 'a'));
-        assertTrue(board.isAloneInTheFile('r', 'a'));
-        assertTrue(board.isAloneInTheFile('R', 'a'));
-        assertTrue(board.isAloneInTheFile('p', 'b'));
-        assertTrue(board.isAloneInTheFile('P', 'b'));
-        assertTrue(board.isAloneInTheFile('n', 'b'));
-        assertTrue(board.isAloneInTheFile('N', 'b'));
+        assertTrue(board.isAloneInTheFile('p', 0));
+        assertTrue(board.isAloneInTheFile('P', 0));
+        assertTrue(board.isAloneInTheFile('r', 0));
+        assertTrue(board.isAloneInTheFile('R', 0));
+        assertTrue(board.isAloneInTheFile('p', 1));
+        assertTrue(board.isAloneInTheFile('P', 1));
+        assertTrue(board.isAloneInTheFile('n', 1));
+        assertTrue(board.isAloneInTheFile('N', 1));
 
     }
 

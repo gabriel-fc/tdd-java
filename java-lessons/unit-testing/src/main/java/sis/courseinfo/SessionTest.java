@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 import static sis.courseinfo.DateUtil.createDate;
 
 
-abstract public class SessionTest {
+abstract public class   SessionTest {
     private Session session;
     private Date startDate;
     public static final int CREDITS = 3;

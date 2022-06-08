@@ -4,6 +4,9 @@ import chess.board.Board;
 import chess.pieces.Piece;
 import util.StringUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
     private Board board;
 
@@ -12,11 +15,14 @@ public class Game {
 
     public void start(){
         board.initialize();
+        for (Piece[] p: board) {
+
+        }
     }
 
     public boolean isValidMovement(String position, Piece.Color color){
-        return Board.isValidFile(StringUtil.getFileFromInput(position))
-                && Board.isValidRank(StringUtil.getRankFromInput(position)) &&
+        return Board.isValidIndex(StringUtil.getFileFromInput(position))
+                && Board.isValidIndex(StringUtil.getRankFromInput(position)) &&
         (board.isPositionEmpty(position) ||
                 isDifferentColor(color, board.getPiece(position).getColor()));
     }
@@ -33,8 +39,6 @@ public class Game {
     private boolean isDifferentColor(Piece.Color color, Piece.Color color2){
         return color != color2;
     }
-
-
 
 
 }

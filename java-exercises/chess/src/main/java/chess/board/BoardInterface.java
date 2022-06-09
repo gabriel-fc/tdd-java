@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess.board;
 
 import chess.board.Board;
 import util.StringUtil;

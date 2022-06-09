@@ -15,5 +15,5 @@ import org.junit.runners.Suite;
         BoardTest.class, CharacterTest.class,
         TypeTest.class, MovementsTest.class, GameTest.class})
 
-public class AllTests {
+public class  AllTests {
 }

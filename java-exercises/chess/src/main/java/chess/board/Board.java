@@ -2,12 +2,9 @@ package chess.board;
 
 import chess.pieces.Piece;
 import chess.pieces.types.NoPiece;
-import chess.pieces.types.Queen;
 import util.StringUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 
 public class Board implements Iterable<Piece[]> {
@@ -33,7 +30,7 @@ public class Board implements Iterable<Piece[]> {
 
     public void setEmptyRank(int rank){
         for (int file = 0; file < 8; file++) {
-            placePiece(Piece.noPiece(), StringUtil.setPosition(file, rank));
+            put(StringUtil.setPosition(file, rank), Piece.noPiece());
         }
     }
     public void setEmptyBoard(){
@@ -46,24 +43,24 @@ public class Board implements Iterable<Piece[]> {
     public void initialize() {
 
         //Rank 1: white pieces
-        placePiece(Piece.createWhiteRook(), "a1");
-        placePiece(Piece.createWhiteKnight(), "b1");
-        placePiece(Piece.createWhiteBishop(), "c1");
-        placePiece(Piece.createWhiteQueen(), "d1");
-        placePiece(Piece.createWhiteKing(), "e1");
-        placePiece(Piece.createWhiteBishop(), "f1");
-        placePiece(Piece.createWhiteKnight(), "g1");
-        placePiece(Piece.createWhiteRook(), "h1");
+        put("a1", Piece.createWhiteRook());
+        put("b1", Piece.createWhiteKnight());
+        put("c1", Piece.createWhiteBishop());
+        put("d1", Piece.createWhiteQueen());
+        put("e1", Piece.createWhiteKing());
+        put("f1", Piece.createWhiteBishop());
+        put("g1", Piece.createWhiteKnight());
+        put("h1", Piece.createWhiteRook());
 
         //rank 2: white pawns
-        placePiece(Piece.createWhitePawn(), "a2");
-        placePiece(Piece.createWhitePawn(), "b2");
-        placePiece(Piece.createWhitePawn(), "c2");
-        placePiece(Piece.createWhitePawn(), "d2");
-        placePiece(Piece.createWhitePawn(), "e2");
-        placePiece(Piece.createWhitePawn(), "f2");
-        placePiece(Piece.createWhitePawn(), "g2");
-        placePiece(Piece.createWhitePawn(), "h2");
+        put("a2", Piece.createWhitePawn());
+        put("b2", Piece.createWhitePawn());
+        put("c2", Piece.createWhitePawn());
+        put("d2", Piece.createWhitePawn());
+        put("e2", Piece.createWhitePawn());
+        put("f2", Piece.createWhitePawn());
+        put("g2", Piece.createWhitePawn());
+        put("h2", Piece.createWhitePawn());
 
 
         //fill the next 4 ranks with blank space
@@ -74,24 +71,24 @@ public class Board implements Iterable<Piece[]> {
         }
 
         //rank 7: black pawns
-        placePiece(Piece.createBlackPawn(), "a7");
-        placePiece(Piece.createBlackPawn(), "b7");
-        placePiece(Piece.createBlackPawn(), "c7");
-        placePiece(Piece.createBlackPawn(), "d7");
-        placePiece(Piece.createBlackPawn(), "e7");
-        placePiece(Piece.createBlackPawn(), "f7");
-        placePiece(Piece.createBlackPawn(), "g7");
-        placePiece(Piece.createBlackPawn(), "h7");
+        put("a7", Piece.createBlackPawn());
+        put("b7", Piece.createBlackPawn());
+        put("c7", Piece.createBlackPawn());
+        put("d7", Piece.createBlackPawn());
+        put("e7", Piece.createBlackPawn());
+        put("f7", Piece.createBlackPawn());
+        put("g7", Piece.createBlackPawn());
+        put("h7", Piece.createBlackPawn());
 
         //rank 8: black pieces
-        placePiece(Piece.createBlackRook(), "a8");
-        placePiece(Piece.createBlackKnight(), "b8");
-        placePiece(Piece.createBlackBishop(), "c8");
-        placePiece(Piece.createBlackQueen(), "d8");
-        placePiece(Piece.createBlackKing(), "e8");
-        placePiece(Piece.createBlackBishop(), "f8");
-        placePiece(Piece.createBlackKnight(), "g8");
-        placePiece(Piece.createBlackRook(), "h8");
+        put("a8", Piece.createBlackRook());
+        put("b8", Piece.createBlackKnight());
+        put("c8", Piece.createBlackBishop());
+        put("d8", Piece.createBlackQueen());
+        put("e8", Piece.createBlackKing());
+        put("f8", Piece.createBlackBishop());
+        put("g8", Piece.createBlackKnight());
+        put("h8", Piece.createBlackRook());
     }
     public Piece getPiece(String position){
         int rank = StringUtil.getRankFromInput(position);
@@ -143,14 +140,14 @@ public class Board implements Iterable<Piece[]> {
         return  strength;
     }
 
-    public void placePiece(Piece piece, String position){
+    public void put(String position, Piece piece){
         int rank = StringUtil.getRankFromInput(position);
         int file = StringUtil.getFileFromInput(position);
         board[rank][file] = piece;
         piece.setPosition(position);
         incrementCount();
-
     }
+
     private void incrementCount(){piecesCount++;}
     public boolean isPositionEmpty(String position){
         return getPiece(position).getClass() == NoPiece.class;

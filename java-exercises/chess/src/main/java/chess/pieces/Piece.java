@@ -103,4 +103,8 @@ public class Piece{
         this.file = StringUtil.getFileFromInput(position);
     }
 
+    public boolean isOpponent(Piece piece){
+        return piece.getColor() != this.color;
+    }
+
 }

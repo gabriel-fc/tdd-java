@@ -1,7 +1,5 @@
 package chess.board;
 
-import chess.board.Board;
-import chess.pieces.BoardInterface;
 import chess.pieces.Piece;
 import org.junit.Before;
 import org.junit.Test;
@@ -77,56 +75,56 @@ public class BoardTest {
     @Test
     public void testPlacePiece(){
         Piece p = Piece.createBlackKnight();
-        board.placePiece(p, "a1");
+        board.put("a1", p);
         assertEquals(board.getPiece("a1"), p);
     }
 
     @Test
     public void testGetStrengthByColor(){
         board.setEmptyBoard();
-        board.placePiece(Piece.createBlackKing(), "b8");
+        board.put("b8", Piece.createBlackKing());
         assertEquals(0, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(0, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createBlackRook(), "c8");
+        board.put("c8", Piece.createBlackRook());
         assertEquals(5, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(0, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createBlackPawn(), "a7");
+        board.put("a7", Piece.createBlackPawn());
         assertEquals(6, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(0, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createBlackPawn(), "c7");
+        board.put("c7", Piece.createBlackPawn());
         assertEquals(7, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(0, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createBlackBishop(), "d7");
+        board.put("d7", Piece.createBlackBishop());
         assertEquals(10, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(0, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createBlackPawn(), "b6");
+        board.put("b6", Piece.createBlackPawn());
         assertEquals(11, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(0, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createBlackQueen(), "e6");
+        board.put("e6", Piece.createBlackQueen());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(0, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhiteKnight(), "f4");
+        board.put("f4", Piece.createWhiteKnight());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(2.5, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhiteQueen(), "g4");
+        board.put("g4", Piece.createWhiteQueen());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(11.5, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhitePawn(), "f3");
+        board.put("f3", Piece.createWhitePawn());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(12.5, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhitePawn(), "h3");
+        board.put("h3", Piece.createWhitePawn());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(13.5, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhitePawn(), "f2");
+        board.put("f2", Piece.createWhitePawn());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(13.5, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhitePawn(), "g2");
+        board.put("g2", Piece.createWhitePawn());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(14.5, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhiteRook(), "e1");
+        board.put("e1", Piece.createWhiteRook());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(19.5, board.getStrength(Piece.Color.WHITE), DELTA);
-        board.placePiece(Piece.createWhiteKing(), "f1");
+        board.put("f1", Piece.createWhiteKing());
         assertEquals(20, board.getStrength(Piece.Color.BLACK), DELTA);
         assertEquals(19.5, board.getStrength(Piece.Color.WHITE), DELTA);
     }

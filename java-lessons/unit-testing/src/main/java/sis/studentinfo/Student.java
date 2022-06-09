@@ -37,14 +37,19 @@ public class Student {
     private ArrayList<Grade> grades;
     private double gpa;
     private String state;
-    public Student(String fullName){
+    public Student(String fullName) {
         this.name = fullName;
-        List<String> nameParts = tokenize(fullName);
+        credits = 0;
+        List<String> nameParts = split(fullName);
+        final int maximumNumberOfNameParts = 3;
+        if (nameParts.size() > maximumNumberOfNameParts) {
+            String message =
+                    "Student name '" + fullName +
+                            "' contains more than " + maximumNumberOfNameParts +
+                            " parts";
+            throw new StudentNameFormatException(message);
+        }
         setName(nameParts);
-        this.credits = 0;
-        this.state = "";
-        this.grades = new ArrayList<>();
-        this.gpa = 0;
     }
 
     private void setName(List<String> nameParts) {

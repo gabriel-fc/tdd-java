@@ -35,6 +35,7 @@ public class Queen extends Piece{
 
         movements.moveInDirection(position, getColor(),
                  movements.new LeftBackward(), possibleMoves);
+
         Collections.sort(possibleMoves);
         return possibleMoves;
     }

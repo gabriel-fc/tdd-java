@@ -4,12 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 import sis.studentinfo.Student;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static sis.courseinfo.DateUtil.createDate;
 
 
@@ -27,6 +27,7 @@ abstract public class   SessionTest {
                 , startDate);
         session.setNumberOfCredits(CREDITS);
     }
+
     abstract protected Session createSession(String department, String number, Date startDate);
 
     @Test
@@ -81,6 +82,7 @@ abstract public class   SessionTest {
         session.enroll(partTimer2);
         assertEquals(3.5, session.averageGpaForPartTimeStudents(), 0.05);
     }
+
     private Student createFullTimeStudent() {
         Student student = new Student("a");
         student.addCredits(Student.CREDITS_REQUIRED_FOR_FULL_TIME);
@@ -91,13 +93,31 @@ abstract public class   SessionTest {
     public void testIterate() {
         enrollStudents(session);
         List<Student> results = new ArrayList<Student>();
-        for (Student student: session)
+        for (Student student : session)
             results.add(student);
         assertEquals(session.getAllStudents(), results);
     }
+
     private void enrollStudents(Session session) {
         session.enroll(new Student("1"));
         session.enroll(new Student("2"));
         session.enroll(new Student("3"));
+    }
+
+    @Test
+    public void testSessionUrl() throws SessionException {
+        final String url = "http://course.langrsoft.com/cmsc300";
+        session.setUrl(url);
+        assertEquals(url, session.getUrl().toString());
+    }
+
+    @Test
+    public void testInvalidSessionUrl() throws SessionException{
+        final String url = "httsp://course.langrsoft.com/cmsc300";
+        try {
+            session.setUrl(url);
+            fail("expected exception due to invalid protocol in URL");
+        } catch (SessionException success) {
+        }
     }
 }
